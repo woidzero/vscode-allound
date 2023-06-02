@@ -1,0 +1,346 @@
+{
+  "name": "vscode-allound",
+  "displayName": "Allound",
+  "description": "A powerful extension for wrapping blocks of code in instructions or statements.",
+  "version": "1.0.2",
+  "publisher": "woidzero",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/woidzero/vscode-allound/issues",
+    "email": "woidzeroo@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/woidzero/vscode-allound.git"
+  },
+  "homepage": "https://github.com/woidzero/vscode-allound",
+  "engines": {
+    "vscode": "^1.55.0"
+  },
+  "categories": [
+    "Snippets",
+    "Formatters",
+    "Other"
+  ],
+  "keywords": [
+    "around",
+    "wrapper",
+    "selection",
+    "code blocks",
+    "snippet",
+    "format",
+    "allound",
+    "instructions",
+    "statements",
+    "python"
+  ],
+  "badges": [
+    {
+      "url": "https://img.shields.io/vscode-marketplace/v/woidzero.vscode-allound.svg?style=flat-square",
+      "href": "https://marketplace.visualstudio.com/items?itemName=woidzero.vscode-allound",
+      "description": "Visual Studio Marketplace"
+    },
+    {
+      "url": "https://img.shields.io/github/last-commit/woidzero/vscode-allound.svg?style=flat-square",
+      "href": "https://github.com/woidzero/vscode-allound/commit",
+      "description": "GitHub Last Commit"
+    },
+    {
+      "url": "https://img.shields.io/github/license/woidzero/vscode-allound.svg?style=flat-square",
+      "href": "https://github.com/woidzero/vscode-allound/LICENSE",
+      "description": "License"
+    }
+  ],
+  "markdown": "github",
+  "icon": "images/logo.png",
+  "galleryBanner": {
+    "color": "#c2e1ea",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/main.js",
+  "browser": "./out/main.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Wrap it up",
+      "properties": {
+        "allound.showOnlyUserDefinedSnippets": {
+          "type": "boolean",
+          "markdownDescription": "Disables default snippets that comes with the extension and shows only used defined snippets.",
+          "default": false
+        },
+        "allound.showRecentlyUsedFirst": {
+          "type": "boolean",
+          "markdownDescription": "Recently used snippets will be displayed on top.",
+          "default": true
+        },
+        "allound.custom": {
+          "type": "object",
+          "default": {}
+        },
+        "allound.with.if": {
+          "type": "object",
+          "default": {
+            "label": "if",
+            "description": "if $condition: ... ",
+            "disabled": false,
+            "snippet": "if ${1:condition}:\n\t$TM_SELECTED_TEXT\n$0",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.ifElse": {
+          "type": "object",
+          "default": {
+            "label": "if/else",
+            "description": "if $condition: ... else: $else",
+            "disabled": false,
+            "snippet": "if ${1:condition}:\n\t$TM_SELECTED_TEXT\nelse:\n\t$2\n$0",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.tryExcept": {
+          "type": "object",
+          "default": {
+            "label": "try/except",
+            "description": "try: ... except Exception: $exceptBlock",
+            "disabled": false,
+            "snippet": "try:\n\t$TM_SELECTED_TEXT\nexcept Exception:\n\t$1\n$0",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.tryFinally": {
+          "type": "object",
+          "default": {
+            "label": "try/finally",
+            "description": "try: ... finally: $finalBlock",
+            "disabled": false,
+            "snippet": "try:\n\t$TM_SELECTED_TEXT\nfinally:\n\t$1\n$0",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.tryExceptFinally": {
+          "type": "object",
+          "default": {
+            "label": "try/except/finally",
+            "description": "try: ... except Exception: $exceptBlock finally: $finalBlock",
+            "disabled": false,
+            "snippet": "try:\n\t$TM_SELECTED_TEXT\nexcept Exception:\n\t$1\nfinally:\n\t$2\n$0",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.forIn": {
+          "type": "object",
+          "default": {
+            "label": "for/in",
+            "description": "for $1 in $2: ...",
+            "disabled": false,
+            "snippet": "for $1 in $2:\n\t$TM_SELECTED_TEXT\n$0",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.while": {
+          "type": "object",
+          "default": {
+            "label": "while",
+            "description": "while $condition: ...",
+            "disabled": false,
+            "snippet": "while ${1:condition}:\n\t$TM_SELECTED_TEXT\n$0",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.functionDefinition": {
+          "type": "object",
+          "default": {
+            "label": "def",
+            "description": "def $name($params): ...",
+            "disabled": false,
+            "snippet": "def ${1:name}(${2:params}):\n\t$TM_SELECTED_TEXT\n$0",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.asyncFunctionDefinition": {
+          "type": "object",
+          "default": {
+            "label": "async def",
+            "description": "async def $name($params): ...",
+            "disabled": false,
+            "snippet": "async def ${1:name}(${2:params}):\n\t$TM_SELECTED_TEXT\n$0",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.blockComment": {
+          "type": "object",
+          "default": {
+            "label": "block comment",
+            "description": "\"\"\"...\"\"\"",
+            "disabled": false,
+            "snippet": "\"\"\"\t${TM_SELECTED_TEXT}\n\"\"\"$0",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.comment": {
+          "type": "object",
+          "default": {
+            "label": "comment",
+            "description": "# ...",
+            "disabled": false,
+            "snippet": "# ${TM_SELECTED_TEXT}$0",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.doubleQuotes": {
+          "type": "object",
+          "default": {
+            "label": "double quotes",
+            "description": "\"...\"",
+            "disabled": false,
+            "snippet": "\"${TM_SELECTED_TEXT}\"$0",
+            "languageIds": [
+              "*"
+            ]
+          }
+        },
+        "allound.with.singleQuotes": {
+          "type": "object",
+          "default": {
+            "label": "single quotes",
+            "description": "'...'",
+            "disabled": false,
+            "snippet": "'${TM_SELECTED_TEXT}'$0",
+            "languageIds": [
+              "*"
+            ]
+          }
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "allound.with",
+        "title": "Wrap With"
+      },
+      {
+        "command": "allound.with.if",
+        "title": "if",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.ifElse",
+        "title": "if/else",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.tryExcept",
+        "title": "try/except",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.tryFinally",
+        "title": "try/finally",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.tryExceptFinally",
+        "title": "try/except/finally",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.forIn",
+        "title": "for/in",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.while",
+        "title": "while",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.functionDefinition",
+        "title": "functionDeclaration",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.asyncFunctionDefinition",
+        "title": "asyncFunctionDeclaration",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.blockComment",
+        "title": "Block Comment",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.comment",
+        "title": "Comment",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.doubleQuotes",
+        "title": "Double Quotes",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.singleQuotes",
+        "title": "Single Quotes",
+        "category": "Wrap With"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "allound.with",
+        "key": "ctrl+shift+T",
+        "mac": "cmd+shift+T",
+        "when": "editorHasSelection"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorHasSelection",
+          "command": "allound.with",
+          "group": "1_modification"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+    "test-compile": "tsc -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.55.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "@vscode/test-web": "^0.0.29",
+    "eslint": "^8.41.0",
+    "typescript": "^4.9.5"
+  }
+}
