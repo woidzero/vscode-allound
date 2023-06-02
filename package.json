@@ -2,7 +2,7 @@
   "name": "vscode-allound",
   "displayName": "Allound",
   "description": "A powerful extension for wrapping blocks of code in instructions or statements.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "woidzero",
   "license": "MIT",
   "bugs": {
@@ -54,7 +54,7 @@
   "markdown": "github",
   "icon": "images/logo.png",
   "galleryBanner": {
-    "color": "#c2e1ea",
+    "color": "#1C1C1C",
     "theme": "dark"
   },
   "activationEvents": [
