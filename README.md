@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div align="center">
 
 <img src="https://raw.githubusercontent.com/woidzero/vscode-allound/master/images/logo.png?token=GHSAT0AAAAAACCEJNZKL4GB72R47C75ZDZAZD2A5SQ">
@@ -392,4 +391,3 @@ For support, email <a href="mailto://woidzeroo@gmail.com">woidzeroo@gmail.com</a
 ## License
 
 `Allound` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
->>>>>>> 3c2e0d9 (1.0.1)
