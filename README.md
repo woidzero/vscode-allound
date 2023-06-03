@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/woidzero/vscode-allound/master/images/logo.png?token=GHSAT0AAAAAACCEJNZKL4GB72R47C75ZDZAZD2A5SQ">
+<img src="images/logo.png" width="100">
 
 <h1>Allound</h1>
 
