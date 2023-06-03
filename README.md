@@ -8,7 +8,6 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/woidzero/vscode-allound.svg?style=flat-square&)](https://github.com/woidzero/vscode-allound)
 [![License](https://img.shields.io/github/license/woidzero/vscode-allound.svg?style=flat-square)](https://github.com/woidzero/vscode-allound)
 
-
 A powerful extension for wrapping blocks of code in instructions or statements.
 
 This extensions based on [Surround by Mehmet Yatkı](https://github.com/yatki/vscode-surround) and rewritten for Python (other languages support soon).
@@ -16,23 +15,22 @@ This extensions based on [Surround by Mehmet Yatkı](https://github.com/yatki/vs
 </div>
 
 ## Table Of Contents
+
 - [Features](#features)
 - [Usage](#usage)
-- [List of commands](#list-of-commands)
 - [Options](#options)
 - [Configuration](#configuration)
-  * [Editing or disabling existing wrapper functions](#editing-or-disabling-existing-wrapper-functions)
-  * [Adding new custom wrapper functions](#adding-new-custom-wrapper-functions)
-  * [Defining language-specific snippets](#defining-language-specific-snippets)
-    + [1. Enabling a snippet for ALL languages](#1-enabling-a-snippet-for-all-languages)
-    + [2. Enabling a snippet for ONLY specified languages](#2-enabling-a-snippet-for-only-specified-languages)
-    + [3. Disabling a snippet for ONLY specified languages](#3-disabling-a-snippet-for-only-specified-languages)
-  * [Notes](#notes)
+  - [Editing or disabling existing wrapper functions](#editing-or-disabling-existing-wrapper-functions)
+  - [Adding new custom wrapper functions](#adding-new-custom-wrapper-functions)
+  - [Defining language-specific snippets](#defining-language-specific-snippets)
+    - [1. Enabling a snippet for ALL languages](#1-enabling-a-snippet-for-all-languages)
+    - [2. Enabling a snippet for ONLY specified languages](#2-enabling-a-snippet-for-only-specified-languages)
+    - [3. Disabling a snippet for ONLY specified languages](#3-disabling-a-snippet-for-only-specified-languages)
+  - [Notes](#notes)
 - [Contribution](#contribution)
-  * [Important Reminder](#important-reminder)
+  - [Important Reminder](#important-reminder)
 - [Support](#support)
 - [License](#license)
-
 
 ## Features
 
@@ -41,7 +39,6 @@ This extensions based on [Surround by Mehmet Yatkı](https://github.com/yatki/vs
 - Sorts recently used snippets on top
 - Assign **shortcuts** for _each_<br>
   wrapper snippets separately
-
 
 ## Usage
 
@@ -55,25 +52,6 @@ to get list of commands and pick one of them.
 > Hint
 >
 > Each wrapper has a **separate command** so you can define keybindings for your favorite wrappers by searching `allound.with.commandName` in the 'Keyboard Shortcuts' section.
-
-## List of commands
-
-| Command                                            | Snippet                                                         |
-| -------------------------------------------------- | --------------------------------------------------------------- |
-| `allound.with` (ctrl+shift+T)                      | List of all the enabled commands below                          |
-| `allound.with.if`                                  | if $condition: ...                                              |
-| `allound.with.ifElse`                              | if $condition: ... else: $else                                  |
-| `allound.with.tryExcept`                           | try: ... except Exception: $exceptBlock                         |
-| `allound.with.tryFinally`                          | try: ... finally: $finalBlock                                   |
-| `allound.with.tryExceptFinally`                    | try: ... except Exception: $exceptBlock finally: $finalBlock    |
-| `allound.with.forIn`                               | for $1 in $2: ...                                               |
-| `allound.with.while`                               | while $condition: ...                                           |
-| `allound.with.functionDefinition`                  | def $name($params): ..                                          |
-| `allound.with.asyncFunctionDefinition`             | async def $name($params): ...                                   |
-| `allound.with.blockComment` (doc-string)           | """..."""                                                       |
-| `allound.with.comment`                             | # ...                                                           |
-| `allound.with.doubleQuotes`                        | "..."                                                           |
-| `allound.with.singleQuotes`                        | '...'                                                           |
 
 ## Options
 
@@ -104,9 +82,9 @@ Example `allound.with.if`:
 ```json
 {
   "label": "if",
-  "description": "if ($condition) { ... }",
+  "description": "if $condition: ...",
   "disabled": false,
-  "snippet": "if(${1:condition}) {\n\t$TM_SELECTED_TEXT\n}$0"
+  "snippet": "if ${1:condition}:\n\t$TM_SELECTED_TEXT\n$0"
 }
 ```
 
@@ -147,7 +125,7 @@ If you want to allow a snippet to work for all document types, simply **REMOVE**
   "label": "if",
   "description": "if $condition: ...",
   "disabled": false,
-  "snippet": "if ${1:condition}: \n\t$TM_SELECTED_TEXT\n$0",
+  "snippet": "if ${1:condition}:\n\t$TM_SELECTED_TEXT\n$0",
   "languageIds": ["*"] // Wildcard allows snippet to work with all languages
 }
 ```
@@ -162,7 +140,7 @@ If you want to allow a snippet to work with `html`, `typescript` and `javascript
   "description": "if $condition: ...",
   "disabled": false,
   "snippet": "if ${1:condition}: \n\t$TM_SELECTED_TEXT\n$0",
-  "languageIds": ["html", "typescript", "javascript"]
+  "languageIds": ["html", "typescript", "javascript"] // Allows snippet to work only with html, typescript, javascript
 }
 ```
 
@@ -176,7 +154,7 @@ you can add `-` (MINUS) sign as a prefix to the language identifiers (_without_ 
   "label": "if",
   "description": "if $condition: ...",
   "disabled": false,
-  "snippet": "if ${1:condition} \n\t$TM_SELECTED_TEXT\n$0",
+  "snippet": "if ${1:condition}:\n\t$TM_SELECTED_TEXT\n$0",
   "languageIds": ["*", "-html", "-typescript", "-javascript"]
 }
 ```

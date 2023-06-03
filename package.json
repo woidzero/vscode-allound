@@ -2,7 +2,7 @@
   "name": "vscode-allound",
   "displayName": "Allound",
   "description": "A powerful extension for wrapping blocks of code in instructions or statements.",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "publisher": "woidzero",
   "license": "MIT",
   "bugs": {
@@ -58,14 +58,14 @@
     "theme": "dark"
   },
   "activationEvents": [
-    "*"
+    "onLanguage:python"
   ],
-  "main": "./out/main.js",
-  "browser": "./out/main.js",
+  "main": "./out/extension.js",
+  "browser": "./out/extension.js",
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "Wrap it up",
+      "title": "Wrap With",
       "properties": {
         "allound.showOnlyUserDefinedSnippets": {
           "type": "boolean",
@@ -87,7 +87,7 @@
             "label": "if",
             "description": "if $condition: ... ",
             "disabled": false,
-            "snippet": "if ${1:condition}:\n\t$TM_SELECTED_TEXT\n$0",
+            "snippet": "if ${1:condition}:\n\t$TM_SELECTED_TEXT\n",
             "languageIds": [
               "python"
             ]
@@ -96,10 +96,46 @@
         "allound.with.ifElse": {
           "type": "object",
           "default": {
-            "label": "if/else",
+            "label": "if ... else",
             "description": "if $condition: ... else: $else",
             "disabled": false,
-            "snippet": "if ${1:condition}:\n\t$TM_SELECTED_TEXT\nelse:\n\t$2\n$0",
+            "snippet": "if ${1:condition}:\n\t$TM_SELECTED_TEXT\nelse:\n\t$2\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.functionDefinition": {
+          "type": "object",
+          "default": {
+            "label": "define",
+            "description": "def $name($params): ...",
+            "disabled": false,
+            "snippet": "def ${1:name}(${2:params}):\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.call": {
+          "type": "object",
+          "default": {
+            "label": "call function",
+            "description": "$name(...)",
+            "disabled": false,
+            "snippet": "${1:name}(${TM_SELECTED_TEXT})",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.print": {
+          "type": "object",
+          "default": {
+            "label": "print",
+            "description": "print(...)",
+            "disabled": false,
+            "snippet": "print(${TM_SELECTED_TEXT})",
             "languageIds": [
               "python"
             ]
@@ -108,10 +144,10 @@
         "allound.with.tryExcept": {
           "type": "object",
           "default": {
-            "label": "try/except",
+            "label": "try ... except",
             "description": "try: ... except Exception: $exceptBlock",
             "disabled": false,
-            "snippet": "try:\n\t$TM_SELECTED_TEXT\nexcept Exception:\n\t$1\n$0",
+            "snippet": "try:\n\t$TM_SELECTED_TEXT\nexcept Exception:\n\t$1\n",
             "languageIds": [
               "python"
             ]
@@ -120,10 +156,10 @@
         "allound.with.tryFinally": {
           "type": "object",
           "default": {
-            "label": "try/finally",
+            "label": "try ... finally",
             "description": "try: ... finally: $finalBlock",
             "disabled": false,
-            "snippet": "try:\n\t$TM_SELECTED_TEXT\nfinally:\n\t$1\n$0",
+            "snippet": "try:\n\t$TM_SELECTED_TEXT\nfinally:\n\t$1\n",
             "languageIds": [
               "python"
             ]
@@ -132,10 +168,10 @@
         "allound.with.tryExceptFinally": {
           "type": "object",
           "default": {
-            "label": "try/except/finally",
-            "description": "try: ... except Exception: $exceptBlock finally: $finalBlock",
+            "label": "try ... except ... finally",
+            "description": "try: ... except Exception: $exceptBlock finally: $finallyBlock",
             "disabled": false,
-            "snippet": "try:\n\t$TM_SELECTED_TEXT\nexcept Exception:\n\t$1\nfinally:\n\t$2\n$0",
+            "snippet": "try:\n\t$TM_SELECTED_TEXT\nexcept Exception:\n\t$1\nfinally:\n\t$2\n",
             "languageIds": [
               "python"
             ]
@@ -144,10 +180,10 @@
         "allound.with.forIn": {
           "type": "object",
           "default": {
-            "label": "for/in",
-            "description": "for $1 in $2: ...",
+            "label": "for ... in",
+            "description": "for $target in $iter: ...",
             "disabled": false,
-            "snippet": "for $1 in $2:\n\t$TM_SELECTED_TEXT\n$0",
+            "snippet": "for ${1:target} in ${2:iter}:\n\t$TM_SELECTED_TEXT\n",
             "languageIds": [
               "python"
             ]
@@ -159,31 +195,67 @@
             "label": "while",
             "description": "while $condition: ...",
             "disabled": false,
-            "snippet": "while ${1:condition}:\n\t$TM_SELECTED_TEXT\n$0",
+            "snippet": "while ${1:condition}:\n\t$TM_SELECTED_TEXT\n",
             "languageIds": [
               "python"
             ]
           }
         },
-        "allound.with.functionDefinition": {
+        "allound.with.withAs": {
           "type": "object",
           "default": {
-            "label": "def",
-            "description": "def $name($params): ...",
+            "label": "with ... as",
+            "description": "with $expr as $target: ...",
             "disabled": false,
-            "snippet": "def ${1:name}(${2:params}):\n\t$TM_SELECTED_TEXT\n$0",
+            "snippet": "with ${1:expr} as ${2:target}:\n\t$TM_SELECTED_TEXT\n",
             "languageIds": [
               "python"
             ]
           }
         },
-        "allound.with.asyncFunctionDefinition": {
+        "allound.with.with": {
           "type": "object",
           "default": {
-            "label": "async def",
-            "description": "async def $name($params): ...",
+            "label": "with",
+            "description": "with $expr: ...",
             "disabled": false,
-            "snippet": "async def ${1:name}(${2:params}):\n\t$TM_SELECTED_TEXT\n$0",
+            "snippet": "with ${1:expr}:\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.withAsAES": {
+          "type": "object",
+          "default": {
+            "label": "with ... as (AES)",
+            "description": "(AS EXPRESSION OF STATEMENT) with $expr as $target: ...",
+            "disabled": false,
+            "snippet": "with $TM_SELECTED_TEXT as ${2:target}:\n\t$3\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.withAES": {
+          "type": "object",
+          "default": {
+            "label": "with (AES)",
+            "description": "(AS EXPRESSION OF STATEMENT) with $expr: ...",
+            "disabled": false,
+            "snippet": "with $TM_SELECTED_TEXT:\n\t$1\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.matchCase": {
+          "type": "object",
+          "default": {
+            "label": "match/case",
+            "description": "match $expr: ... case $pattern: $caseBlock",
+            "disabled": false,
+            "snippet": "match ${1:expr}:\n\tcase ${2:pattern}:\n\t\t$TM_SELECTED_TEXT\n",
             "languageIds": [
               "python"
             ]
@@ -193,11 +265,11 @@
           "type": "object",
           "default": {
             "label": "block comment",
-            "description": "\"\"\"...\"\"\"",
+            "description": "$comment_start ... $comment_end",
             "disabled": false,
-            "snippet": "\"\"\"\t${TM_SELECTED_TEXT}\n\"\"\"$0",
+            "snippet": "$BLOCK_COMMENT_START\n\t$TM_SELECTED_TEXT\n$BLOCK_COMMENT_END",
             "languageIds": [
-              "python"
+              "*"
             ]
           }
         },
@@ -207,19 +279,19 @@
             "label": "comment",
             "description": "# ...",
             "disabled": false,
-            "snippet": "# ${TM_SELECTED_TEXT}$0",
+            "snippet": "$LINE_COMMENT $TM_SELECTED_TEXT",
             "languageIds": [
-              "python"
+              "*"
             ]
           }
         },
         "allound.with.doubleQuotes": {
           "type": "object",
           "default": {
-            "label": "double quotes",
+            "label": "Double quotes",
             "description": "\"...\"",
             "disabled": false,
-            "snippet": "\"${TM_SELECTED_TEXT}\"$0",
+            "snippet": "\"${TM_SELECTED_TEXT/['\"](.*?)['\"]/$1/g}\"",
             "languageIds": [
               "*"
             ]
@@ -228,12 +300,108 @@
         "allound.with.singleQuotes": {
           "type": "object",
           "default": {
-            "label": "single quotes",
+            "label": "Single quotes",
             "description": "'...'",
             "disabled": false,
-            "snippet": "'${TM_SELECTED_TEXT}'$0",
+            "snippet": "'${TM_SELECTED_TEXT/['\"](.*?)['\"]/$1/g}'",
             "languageIds": [
               "*"
+            ]
+          }
+        },
+        "allound.with.replaceDoubleQuotes": {
+          "type": "object",
+          "default": {
+            "label": "Replace with double quotes",
+            "description": "\"...\"",
+            "disabled": false,
+            "snippet": "${TM_SELECTED_TEXT/[\\']/\"/g}",
+            "languageIds": [
+              "*"
+            ]
+          }
+        },
+        "allound.with.replaceSingleQuotes": {
+          "type": "object",
+          "default": {
+            "label": "Replace with single quotes",
+            "description": "'...'",
+            "disabled": false,
+            "snippet": "${TM_SELECTED_TEXT/[\\\"]/'/g}",
+            "languageIds": [
+              "*"
+            ]
+          }
+        },
+        "allound.with.asyncFunctionDefinition": {
+          "type": "object",
+          "default": {
+            "label": "async def",
+            "description": "async def $name($params): ...",
+            "disabled": false,
+            "snippet": "async def ${1:name}(${2:params}):\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.asyncForIn": {
+          "type": "object",
+          "default": {
+            "label": "async for/in",
+            "description": "async for $target in $iter: ...",
+            "disabled": false,
+            "snippet": "async for ${1:target} in ${2:iter}:\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.asyncWithAs": {
+          "type": "object",
+          "default": {
+            "label": "async with ... as",
+            "description": "async with $expr as $target: ...",
+            "disabled": false,
+            "snippet": "async with ${1:expr} as ${2:target}:\n\t$3\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.asyncWith": {
+          "type": "object",
+          "default": {
+            "label": "async with",
+            "description": "async with $expr: ...",
+            "disabled": false,
+            "snippet": "async with ${1:expr}:\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.asyncWithAsAES": {
+          "type": "object",
+          "default": {
+            "label": "async with ... as (AES)",
+            "description": "(AS EXPRESSION OF STATEMENT) async with $expr as $target: ...",
+            "disabled": false,
+            "snippet": "async with $TM_SELECTED_TEXT as ${1:target}:\n\t$2\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.asyncWithAES": {
+          "type": "object",
+          "default": {
+            "label": "async with (AES)",
+            "description": "(AS EXPRESSION OF STATEMENT) async with $expr: ...",
+            "disabled": false,
+            "snippet": "async with $TM_SELECTED_TEXT:\n\t$1\n",
+            "languageIds": [
+              "python"
             ]
           }
         }
@@ -252,6 +420,26 @@
       {
         "command": "allound.with.ifElse",
         "title": "if/else",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.print",
+        "title": "Print",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.call",
+        "title": "Function Call",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.functionDefinition",
+        "title": "Function Definition",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.asyncFunctionDefinition",
+        "title": "Async Function Definition",
         "category": "Wrap With"
       },
       {
@@ -275,28 +463,43 @@
         "category": "Wrap With"
       },
       {
+        "command": "allound.with.withAs",
+        "title": "with/as",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.withAsAES",
+        "title": "with/as (AS EXPRESSION OF STATEMENT)",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.with",
+        "title": "with",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.withAES",
+        "title": "with/as (AS EXPRESSION OF STATEMENT)",
+        "category": "Wrap With"
+      },
+      {
         "command": "allound.with.while",
         "title": "while",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.functionDefinition",
-        "title": "functionDeclaration",
-        "category": "Wrap With"
-      },
-      {
-        "command": "allound.with.asyncFunctionDefinition",
-        "title": "asyncFunctionDeclaration",
-        "category": "Wrap With"
-      },
-      {
-        "command": "allound.with.blockComment",
-        "title": "Block Comment",
+        "command": "allound.with.matchCase",
+        "title": "match/case",
         "category": "Wrap With"
       },
       {
         "command": "allound.with.comment",
         "title": "Comment",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.blockComment",
+        "title": "Block Comment",
         "category": "Wrap With"
       },
       {
@@ -307,6 +510,41 @@
       {
         "command": "allound.with.singleQuotes",
         "title": "Single Quotes",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.replaceDoubleQuotes",
+        "title": "Replace with double quotes",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.replaceSingleQuotes",
+        "title": "Replace with single quotes",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.asyncForIn",
+        "title": "async for/in",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.asyncWithAs",
+        "title": "async with/as",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.asyncWith",
+        "title": "async with",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.asyncWithAsAES",
+        "title": "async with/as (AS EXPRESSION OF STATEMENT)",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.asyncWithAES",
+        "title": "async with (AS EXPRESSION OF STATEMENT)",
         "category": "Wrap With"
       }
     ],
@@ -329,11 +567,12 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run esbuild-base -- --minify",
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
-    "esbuild": "npm run esbuild-base -- --sourcemap",
-    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "test-compile": "tsc -p ./"
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint \"src/**/*.ts\"",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
     "@types/vscode": "^1.55.0",
@@ -341,6 +580,6 @@
     "@typescript-eslint/parser": "^5.59.8",
     "@vscode/test-web": "^0.0.29",
     "eslint": "^8.41.0",
-    "typescript": "^4.9.5"
+    "typescript": "^5.0.2"
   }
 }
