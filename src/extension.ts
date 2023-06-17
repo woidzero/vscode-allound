@@ -9,19 +9,8 @@ import {
   Position,
 } from "vscode";
 
+import { IAlloundItem, IAlloundConfig } from "./types";
 
-interface IAlloundItem {
-  label: string;
-  description?: string;
-  detail?: string;
-  snippet: string;
-  disabled?: boolean;
-  languageIds?: string;
-}
-
-interface IAlloundConfig {
-  [key: string]: IAlloundItem;
-}
 
 function getLanguageId(): string | undefined {
   let editor = window.activeTextEditor;
