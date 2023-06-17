@@ -81,7 +81,7 @@
           "type": "object",
           "default": {}
         },
-        "allound.with.if": {
+        "allound.with.pyif": {
           "type": "object",
           "default": {
             "label": "if",
@@ -93,7 +93,7 @@
             ]
           }
         },
-        "allound.with.ifElse": {
+        "allound.with.pyifElse": {
           "type": "object",
           "default": {
             "label": "if ... else",
@@ -105,7 +105,7 @@
             ]
           }
         },
-        "allound.with.functionDefinition": {
+        "allound.with.pyfunctionDefinition": {
           "type": "object",
           "default": {
             "label": "define",
@@ -117,7 +117,7 @@
             ]
           }
         },
-        "allound.with.call": {
+        "allound.with.pycall": {
           "type": "object",
           "default": {
             "label": "call function",
@@ -129,7 +129,7 @@
             ]
           }
         },
-        "allound.with.print": {
+        "allound.with.pyprint": {
           "type": "object",
           "default": {
             "label": "print",
@@ -141,7 +141,7 @@
             ]
           }
         },
-        "allound.with.tryExcept": {
+        "allound.with.pytryExcept": {
           "type": "object",
           "default": {
             "label": "try ... except",
@@ -153,7 +153,7 @@
             ]
           }
         },
-        "allound.with.tryFinally": {
+        "allound.with.pytryFinally": {
           "type": "object",
           "default": {
             "label": "try ... finally",
@@ -165,7 +165,7 @@
             ]
           }
         },
-        "allound.with.tryExceptFinally": {
+        "allound.with.pytryExceptFinally": {
           "type": "object",
           "default": {
             "label": "try ... except ... finally",
@@ -177,7 +177,7 @@
             ]
           }
         },
-        "allound.with.forIn": {
+        "allound.with.pyforIn": {
           "type": "object",
           "default": {
             "label": "for ... in",
@@ -189,7 +189,7 @@
             ]
           }
         },
-        "allound.with.while": {
+        "allound.with.pywhile": {
           "type": "object",
           "default": {
             "label": "while",
@@ -201,7 +201,7 @@
             ]
           }
         },
-        "allound.with.withAs": {
+        "allound.with.pywithAs": {
           "type": "object",
           "default": {
             "label": "with ... as",
@@ -213,7 +213,7 @@
             ]
           }
         },
-        "allound.with.with": {
+        "allound.with.pywith": {
           "type": "object",
           "default": {
             "label": "with",
@@ -225,31 +225,7 @@
             ]
           }
         },
-        "allound.with.withAsAES": {
-          "type": "object",
-          "default": {
-            "label": "with ... as (AES)",
-            "description": "(AS EXPRESSION OF STATEMENT) with $expr as $target: ...",
-            "disabled": false,
-            "snippet": "with $TM_SELECTED_TEXT as ${2:target}:\n\t$3\n",
-            "languageIds": [
-              "python"
-            ]
-          }
-        },
-        "allound.with.withAES": {
-          "type": "object",
-          "default": {
-            "label": "with (AES)",
-            "description": "(AS EXPRESSION OF STATEMENT) with $expr: ...",
-            "disabled": false,
-            "snippet": "with $TM_SELECTED_TEXT:\n\t$1\n",
-            "languageIds": [
-              "python"
-            ]
-          }
-        },
-        "allound.with.matchCase": {
+        "allound.with.pymatchCase": {
           "type": "object",
           "default": {
             "label": "match/case",
@@ -333,7 +309,7 @@
             ]
           }
         },
-        "allound.with.asyncFunctionDefinition": {
+        "allound.with.pyasyncFunctionDefinition": {
           "type": "object",
           "default": {
             "label": "async def",
@@ -345,7 +321,7 @@
             ]
           }
         },
-        "allound.with.asyncForIn": {
+        "allound.with.pyasyncForIn": {
           "type": "object",
           "default": {
             "label": "async for/in",
@@ -357,7 +333,7 @@
             ]
           }
         },
-        "allound.with.asyncWithAs": {
+        "allound.with.pyasyncWithAs": {
           "type": "object",
           "default": {
             "label": "async with ... as",
@@ -369,37 +345,13 @@
             ]
           }
         },
-        "allound.with.asyncWith": {
+        "allound.with.pyasyncWith": {
           "type": "object",
           "default": {
             "label": "async with",
             "description": "async with $expr: ...",
             "disabled": false,
             "snippet": "async with ${1:expr}:\n\t$TM_SELECTED_TEXT\n",
-            "languageIds": [
-              "python"
-            ]
-          }
-        },
-        "allound.with.asyncWithAsAES": {
-          "type": "object",
-          "default": {
-            "label": "async with ... as (AES)",
-            "description": "(AS EXPRESSION OF STATEMENT) async with $expr as $target: ...",
-            "disabled": false,
-            "snippet": "async with $TM_SELECTED_TEXT as ${1:target}:\n\t$2\n",
-            "languageIds": [
-              "python"
-            ]
-          }
-        },
-        "allound.with.asyncWithAES": {
-          "type": "object",
-          "default": {
-            "label": "async with (AES)",
-            "description": "(AS EXPRESSION OF STATEMENT) async with $expr: ...",
-            "disabled": false,
-            "snippet": "async with $TM_SELECTED_TEXT:\n\t$1\n",
             "languageIds": [
               "python"
             ]
@@ -413,82 +365,77 @@
         "title": "Wrap With"
       },
       {
-        "command": "allound.with.if",
+        "command": "allound.with.pyif",
         "title": "if",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.ifElse",
+        "command": "allound.with.pyifElse",
         "title": "if/else",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.print",
+        "command": "allound.with.pyprint",
         "title": "Print",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.call",
+        "command": "allound.with.pycall",
         "title": "Function Call",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.functionDefinition",
+        "command": "allound.with.pyfunctionDefinition",
         "title": "Function Definition",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.asyncFunctionDefinition",
+        "command": "allound.with.pyasyncFunctionDefinition",
         "title": "Async Function Definition",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.tryExcept",
+        "command": "allound.with.pytryExcept",
         "title": "try/except",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.tryFinally",
+        "command": "allound.with.pytryFinally",
         "title": "try/finally",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.tryExceptFinally",
+        "command": "allound.with.pytryExceptFinally",
         "title": "try/except/finally",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.forIn",
+        "command": "allound.with.pyforIn",
         "title": "for/in",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.withAs",
+        "command": "allound.with.pywithAs",
         "title": "with/as",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.withAsAES",
+        "command": "allound.with.pywithAsAES",
         "title": "with/as (AS EXPRESSION OF STATEMENT)",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.with",
+        "command": "allound.with.pywith",
         "title": "with",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.withAES",
-        "title": "with/as (AS EXPRESSION OF STATEMENT)",
-        "category": "Wrap With"
-      },
-      {
-        "command": "allound.with.while",
+        "command": "allound.with.pywhile",
         "title": "while",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.matchCase",
+        "command": "allound.with.pymatchCase",
         "title": "match/case",
         "category": "Wrap With"
       },
@@ -523,28 +470,18 @@
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.asyncForIn",
+        "command": "allound.with.pyasyncForIn",
         "title": "async for/in",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.asyncWithAs",
+        "command": "allound.with.pyasyncWithAs",
         "title": "async with/as",
         "category": "Wrap With"
       },
       {
-        "command": "allound.with.asyncWith",
+        "command": "allound.with.pyasyncWith",
         "title": "async with",
-        "category": "Wrap With"
-      },
-      {
-        "command": "allound.with.asyncWithAsAES",
-        "title": "async with/as (AS EXPRESSION OF STATEMENT)",
-        "category": "Wrap With"
-      },
-      {
-        "command": "allound.with.asyncWithAES",
-        "title": "async with (AS EXPRESSION OF STATEMENT)",
         "category": "Wrap With"
       }
     ],
