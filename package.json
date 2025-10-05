@@ -1,0 +1,523 @@
+{
+  "name": "vscode-allound",
+  "displayName": "Allound",
+  "description": "A powerful extension for wrapping blocks of code in instructions or statements.",
+  "version": "2.0.0",
+  "publisher": "woidzero",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/woidzero/vscode-allound/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/woidzero/vscode-allound.git"
+  },
+  "homepage": "https://github.com/woidzero/vscode-allound",
+  "engines": {
+    "vscode": "^1.55.0"
+  },
+  "categories": [
+    "Snippets",
+    "Formatters",
+    "Other"
+  ],
+  "keywords": [
+    "around",
+    "wrapper",
+    "selection",
+    "code blocks",
+    "snippet",
+    "format",
+    "allound",
+    "instructions",
+    "statements",
+    "python"
+  ],
+  "badges": [
+    {
+      "url": "https://img.shields.io/vscode-marketplace/v/woidzero.vscode-allound.svg?style=flat-square",
+      "href": "https://marketplace.visualstudio.com/items?itemName=woidzero.vscode-allound",
+      "description": "Visual Studio Marketplace"
+    },
+    {
+      "url": "https://img.shields.io/github/last-commit/woidzero/vscode-allound.svg?style=flat-square",
+      "href": "https://github.com/woidzero/vscode-allound/commit",
+      "description": "GitHub Last Commit"
+    },
+    {
+      "url": "https://img.shields.io/github/license/woidzero/vscode-allound.svg?style=flat-square",
+      "href": "https://github.com/woidzero/vscode-allound/LICENSE",
+      "description": "License"
+    }
+  ],
+  "markdown": "github",
+  "icon": "images/logo.png",
+  "galleryBanner": {
+    "color": "#1C1C1C",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "onLanguage:python",
+    "workspaceContains:**/*.py"
+  ],
+  "main": "./out/extension.js",
+  "browser": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Wrap With",
+      "properties": {
+        "allound.showOnlyUserDefinedSnippets": {
+          "type": "boolean",
+          "markdownDescription": "Disables default snippets that comes with the extension and shows only used defined snippets.",
+          "default": false
+        },
+        "allound.showRecentlyUsedFirst": {
+          "type": "boolean",
+          "markdownDescription": "Recently used snippets will be displayed on top.",
+          "default": true
+        },
+        "allound.custom": {
+          "type": "object",
+          "default": {}
+        },
+        "allound.with.pyif": {
+          "type": "object",
+          "default": {
+            "label": "if",
+            "description": "if $condition: ... ",
+            "disabled": false,
+            "snippet": "if ${1:condition}:\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pyifElse": {
+          "type": "object",
+          "default": {
+            "label": "if ... else",
+            "description": "if $condition: ... else: $else",
+            "disabled": false,
+            "snippet": "if ${1:condition}:\n\t$TM_SELECTED_TEXT\nelse:\n\t$2\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pyfunctionDefinition": {
+          "type": "object",
+          "default": {
+            "label": "define",
+            "description": "def $name($params): ...",
+            "disabled": false,
+            "snippet": "def ${1:name}(${2:params}):\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pycall": {
+          "type": "object",
+          "default": {
+            "label": "call function",
+            "description": "$name(...)",
+            "disabled": false,
+            "snippet": "${1:name}(${TM_SELECTED_TEXT})",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pyprint": {
+          "type": "object",
+          "default": {
+            "label": "print",
+            "description": "print(...)",
+            "disabled": false,
+            "snippet": "print(${TM_SELECTED_TEXT})",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pytryExcept": {
+          "type": "object",
+          "default": {
+            "label": "try ... except",
+            "description": "try: ... except Exception: $exceptBlock",
+            "disabled": false,
+            "snippet": "try:\n\t$TM_SELECTED_TEXT\nexcept Exception:\n\t$1\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pytryFinally": {
+          "type": "object",
+          "default": {
+            "label": "try ... finally",
+            "description": "try: ... finally: $finalBlock",
+            "disabled": false,
+            "snippet": "try:\n\t$TM_SELECTED_TEXT\nfinally:\n\t$1\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pytryExceptFinally": {
+          "type": "object",
+          "default": {
+            "label": "try ... except ... finally",
+            "description": "try: ... except Exception: $exceptBlock finally: $finallyBlock",
+            "disabled": false,
+            "snippet": "try:\n\t$TM_SELECTED_TEXT\nexcept Exception:\n\t$1\nfinally:\n\t$2\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pyforIn": {
+          "type": "object",
+          "default": {
+            "label": "for ... in",
+            "description": "for $target in $iter: ...",
+            "disabled": false,
+            "snippet": "for ${1:target} in ${2:iter}:\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pywhile": {
+          "type": "object",
+          "default": {
+            "label": "while",
+            "description": "while $condition: ...",
+            "disabled": false,
+            "snippet": "while ${1:condition}:\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pywithAs": {
+          "type": "object",
+          "default": {
+            "label": "with ... as",
+            "description": "with $expr as $target: ...",
+            "disabled": false,
+            "snippet": "with ${1:expr} as ${2:target}:\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pywith": {
+          "type": "object",
+          "default": {
+            "label": "with",
+            "description": "with $expr: ...",
+            "disabled": false,
+            "snippet": "with ${1:expr}:\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pymatchCase": {
+          "type": "object",
+          "default": {
+            "label": "match/case",
+            "description": "match $expr: ... case $pattern: $caseBlock",
+            "disabled": false,
+            "snippet": "match ${1:expr}:\n\tcase ${2:pattern}:\n\t\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.blockComment": {
+          "type": "object",
+          "default": {
+            "label": "block comment",
+            "description": "$comment_start ... $comment_end",
+            "disabled": false,
+            "snippet": "$BLOCK_COMMENT_START\n\t$TM_SELECTED_TEXT\n$BLOCK_COMMENT_END",
+            "languageIds": [
+              "*"
+            ]
+          }
+        },
+        "allound.with.comment": {
+          "type": "object",
+          "default": {
+            "label": "comment",
+            "description": "# ...",
+            "disabled": false,
+            "snippet": "$LINE_COMMENT $TM_SELECTED_TEXT",
+            "languageIds": [
+              "*"
+            ]
+          }
+        },
+        "allound.with.doubleQuotes": {
+          "type": "object",
+          "default": {
+            "label": "Double quotes",
+            "description": "\"...\"",
+            "disabled": false,
+            "snippet": "\"${TM_SELECTED_TEXT/['\"](.*?)['\"]/$1/g}\"",
+            "languageIds": [
+              "*"
+            ]
+          }
+        },
+        "allound.with.singleQuotes": {
+          "type": "object",
+          "default": {
+            "label": "Single quotes",
+            "description": "'...'",
+            "disabled": false,
+            "snippet": "'${TM_SELECTED_TEXT/['\"](.*?)['\"]/$1/g}'",
+            "languageIds": [
+              "*"
+            ]
+          }
+        },
+        "allound.with.replaceDoubleQuotes": {
+          "type": "object",
+          "default": {
+            "label": "Replace with double quotes",
+            "description": "\"...\"",
+            "disabled": false,
+            "snippet": "${TM_SELECTED_TEXT/[\\']/\"/g}",
+            "languageIds": [
+              "*"
+            ]
+          }
+        },
+        "allound.with.replaceSingleQuotes": {
+          "type": "object",
+          "default": {
+            "label": "Replace with single quotes",
+            "description": "'...'",
+            "disabled": false,
+            "snippet": "${TM_SELECTED_TEXT/[\\\"]/'/g}",
+            "languageIds": [
+              "*"
+            ]
+          }
+        },
+        "allound.with.pyasyncFunctionDefinition": {
+          "type": "object",
+          "default": {
+            "label": "async def",
+            "description": "async def $name($params): ...",
+            "disabled": false,
+            "snippet": "async def ${1:name}(${2:params}):\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pyasyncForIn": {
+          "type": "object",
+          "default": {
+            "label": "async for/in",
+            "description": "async for $target in $iter: ...",
+            "disabled": false,
+            "snippet": "async for ${1:target} in ${2:iter}:\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pyasyncWithAs": {
+          "type": "object",
+          "default": {
+            "label": "async with ... as",
+            "description": "async with $expr as $target: ...",
+            "disabled": false,
+            "snippet": "async with ${1:expr} as ${2:target}:\n\t$3\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        },
+        "allound.with.pyasyncWith": {
+          "type": "object",
+          "default": {
+            "label": "async with",
+            "description": "async with $expr: ...",
+            "disabled": false,
+            "snippet": "async with ${1:expr}:\n\t$TM_SELECTED_TEXT\n",
+            "languageIds": [
+              "python"
+            ]
+          }
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "allound.with",
+        "title": "Wrap With"
+      },
+      {
+        "command": "allound.with.pyif",
+        "title": "if",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pyifElse",
+        "title": "if/else",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pyprint",
+        "title": "Print",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pycall",
+        "title": "Function Call",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pyfunctionDefinition",
+        "title": "Function Definition",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pyasyncFunctionDefinition",
+        "title": "Async Function Definition",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pytryExcept",
+        "title": "try/except",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pytryFinally",
+        "title": "try/finally",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pytryExceptFinally",
+        "title": "try/except/finally",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pyforIn",
+        "title": "for/in",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pywithAs",
+        "title": "with/as",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pywithAsAES",
+        "title": "with/as (AS EXPRESSION OF STATEMENT)",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pywith",
+        "title": "with",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pywhile",
+        "title": "while",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pymatchCase",
+        "title": "match/case",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.comment",
+        "title": "Comment",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.blockComment",
+        "title": "Block Comment",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.doubleQuotes",
+        "title": "Double Quotes",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.singleQuotes",
+        "title": "Single Quotes",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.replaceDoubleQuotes",
+        "title": "Replace with double quotes",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.replaceSingleQuotes",
+        "title": "Replace with single quotes",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pyasyncForIn",
+        "title": "async for/in",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pyasyncWithAs",
+        "title": "async with/as",
+        "category": "Wrap With"
+      },
+      {
+        "command": "allound.with.pyasyncWith",
+        "title": "async with",
+        "category": "Wrap With"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "allound.with",
+        "key": "ctrl+shift+T",
+        "mac": "cmd+shift+T",
+        "when": "editorHasSelection"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorHasSelection",
+          "command": "allound.with",
+          "group": "1_modification"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint \"src/**/*.ts\"",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.93.0",
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/parser": "^8.8.0",
+    "@vscode/test-web": "^0.0.61",
+    "eslint": "^9.11.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  }
+}
