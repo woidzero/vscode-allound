@@ -8,7 +8,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/woidzero/vscode-allound.svg?style=flat-square&)](https://github.com/woidzero/vscode-allound)
 [![License](https://img.shields.io/github/license/woidzero/vscode-allound.svg?style=flat-square)](https://github.com/woidzero/vscode-allound)
 
-A powerful extension for wrapping blocks of code in instructions or statements.
+🩺 A powerful extension for wrapping blocks of code in instructions or statements.
 
 This extension fork of [Surround by Mehmet Yatkı](https://github.com/yatki/vscode-surround) and rewritten for Python (other languages support soon).
 
